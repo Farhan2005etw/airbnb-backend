@@ -18,8 +18,8 @@ hostRouter.get("/add-home", (req, res, next) => {
 const registeredHomes = [];
 
 hostRouter.post("/add-home", (req, res, next) => {
-    console.log('home registration successfull for:', req.body.houseName )
-    registeredHomes.push({houseName: req.body.houseName});
+    console.log('home registration successfull for:',  req.body )
+    registeredHomes.push( req.body);
    res.render('homeAdded', {PageTitle : 'Successfull'})
 })
 
