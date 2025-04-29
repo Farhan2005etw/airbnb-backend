@@ -10,6 +10,8 @@ const {hostRouter} = require('./routes/hostRouter')
 const rootDir = require('./utils/path')
 
 const app = express()
+//Local Moduels
+const errorController = require('./controller/errors')
 
 
 //Middleware
@@ -24,9 +26,7 @@ app.use("/host",hostRouter);
 app.use(express.static(path.join(rootDir,  'public')));
 
 
-app.use((req, res, next) => {
-    res.status(404).render('404', {PageTitle: 'Page Not Found'})
-})
+app.use(errorController.pageNotFound)
 
 
 

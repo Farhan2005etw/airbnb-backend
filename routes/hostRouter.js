@@ -5,25 +5,15 @@ const path = require('path')
 const express = require('express')
 
 //Local Modules
-const rootDir = require('../utils/path')
+const homesController = require('../controller/homes')
 
 
 const hostRouter = express.Router();
 
 
-hostRouter.get("/add-home", (req, res, next) => {
-    res.render('addHome', {PageTitle : 'Add Your Home'})
-})
-
-const registeredHomes = [];
-
-hostRouter.post("/add-home", (req, res, next) => {
-    console.log('home registration successfull for:',  req.body )
-    registeredHomes.push( req.body);
-   res.render('homeAdded', {PageTitle : 'Successfull'})
-})
+hostRouter.get("/add-home", homesController.getAddHome)
+hostRouter.post("/add-home", homesController.postAddHome)
 
 
 
 exports.hostRouter = hostRouter;
-exports.registeredHomes = registeredHomes;
