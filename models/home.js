@@ -4,8 +4,6 @@ const path = require('path');
 
 const rootDir = require('../utils/path')
 
-//fake database
-const registeredHomes = [];
 
 module.exports = class Home {
     constructor(houseName, price, location, rating, photo) {
@@ -17,20 +15,20 @@ module.exports = class Home {
     }
 
     save() {
+        Home.fetchAll ((registeredHomes) => {
         registeredHomes.push(this);
         const homeDataPath = path.join(rootDir, 'data', 'homes.json');
         fs.writeFile(homeDataPath, JSON.stringify(registeredHomes), error=> {
             console.log("file writing concluded", error);
-        });
+        });})
     }
 
-    static fetchAll() {
+    static fetchAll(callback) {
         const filePath = path.join(rootDir, 'data', 'homes.json');
         fs.readFile(filePath, (error, data) => {
-            if (error) {
-                return []
-            } 
-            return JSON.parse(data);
+
+            callback(!error ? JSON.parse(data) : [])
+          
         })
         
     }}
