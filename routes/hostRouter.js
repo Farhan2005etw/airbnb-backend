@@ -5,14 +5,15 @@ const path = require('path')
 const express = require('express')
 
 //Local Modules
-const homesController = require('../controller/homes')
+const hostController = require('../controller/hostController')
 
 
 const hostRouter = express.Router();
 
 
-hostRouter.get("/add-home", homesController.getAddHome)
-hostRouter.post("/add-home", homesController.postAddHome)
+hostRouter.get("/add-home", hostController.getAddHome)
+hostRouter.post("/add-home", hostController.postAddHome)
+hostRouter.get("/host-home-list", hostController.getHostHomes)
 
 
 

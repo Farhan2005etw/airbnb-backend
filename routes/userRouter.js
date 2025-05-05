@@ -5,11 +5,14 @@ const path = require('path')
 const express = require('express')
 
 //Local Modules
-const homesController = require('../controller/homes')
+const userController = require('../controller/userController')
 
 
 const userRouter = express.Router();
 
-userRouter.get("/", homesController.getHome)
+userRouter.get("/", userController.getIndex)
+userRouter.get("/bookings", userController.getBookings)
+userRouter.get("/homes", userController.getHome)
+userRouter.get("/favourites", userController.getFavouriteList)
 
 module.exports = userRouter;
