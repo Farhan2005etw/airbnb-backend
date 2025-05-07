@@ -25,6 +25,13 @@ exports.getFavouriteList = (req, res, next) => {
    Home.fetchAll((registeredHomes) =>  res.render('store/favourite-list', {registeredHomes: registeredHomes, PageTitle: 'My Favourite'} )); 
 }
 
+exports.getHomeDetails =(req, res, next) => {
+    const homeId = req.params.homeId;
+    console.log("At Home Detail page", homeId)
+    res.render('store/home-details', { PageTitle: 'Home Detail'} )
+    
+   
+};
 
 
 

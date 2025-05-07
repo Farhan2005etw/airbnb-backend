@@ -15,4 +15,6 @@ userRouter.get("/bookings", userController.getBookings)
 userRouter.get("/homes", userController.getHome)
 userRouter.get("/favourites", userController.getFavouriteList)
 
+userRouter.get("/homes/:homeId", userController.getHomeDetails)
+
 module.exports = userRouter;
