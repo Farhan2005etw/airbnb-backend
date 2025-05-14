@@ -28,8 +28,28 @@ exports.postAddHome = (req, res, next) => {
    res.render('host/homeAdded', {PageTitle : 'Successfull'})
 };
 
+exports.postEditHome = (req, res, next) => {
+   
+    const {id, houseName, price, location, rating, photo} = req.body;
+    const home = new Home(houseName, price, location, rating, photo)
+    home.id = id
+    home.save(); 
+   res.redirect('/host/host-home-list')
+};
 exports.getHostHomes =(req, res, next) => {
     Home.fetchAll((registeredHomes) =>  res.render('host/host-home-list', {registeredHomes: registeredHomes, PageTitle: 'Host Homes List'} ));    
     
    
+};
+
+exports.postDeleteHome = (req, res, next) => {
+    const homeId = req.params.homeId;
+    console.log("came to delete Home", homeId)
+    Home.deleteById(homeId, err => {
+        if (err) {
+            console.log("error while deleting",  err)
+        }
+        res.redirect('/host/host-home-list')
+    })
+
 };

@@ -24,7 +24,9 @@
                     </div>
                   </div>
                   <div class="text-center">
-                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Delete Home</button>
+                     <form method="POST" action="/host/delete-home/<%= home.id%>">
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Delete Home</button>
+                    </form>
                     <a href="/host/edit-home/<%=home.id%>?editing=true" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Edit Your Home</a>
                   </div>
                 </div>

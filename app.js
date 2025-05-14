@@ -12,6 +12,14 @@ const rootDir = require('./utils/path')
 const app = express()
 //Local Moduels
 const errorController = require('./controller/errors')
+const db = require('./utils/databaseUtils.js');
+
+db.execute('SELECT * FROM homes').then(([rows, fields]) => {
+    console.log('getting from db', rows);
+})
+.catch(err => {
+    console.log('error while fetching data', err);
+})
 
 
 //Middleware

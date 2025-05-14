@@ -28,4 +28,13 @@ module.exports = class favourite {
         })
     }
 
+     static deleteById(delHomeId, callback) {
+        favourite.getFavourites(homeIds => {
+          homeIds = homeIds.filter(homeId => delHomeId !== homeId )
+          fs.writeFile(favouriteDataPath, JSON.stringify(homeIds), callback);
+          
+          
+        });
+      }
+
 }
