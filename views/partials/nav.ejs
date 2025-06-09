@@ -1,47 +1,70 @@
 <header class="bg-red-500 text-white p-4 shadow-md">
   <nav class="container mx-auto flex justify-between items-center">
+    <!-- Logo -->
     <div class="flex items-center">
-      <a
-        href="/"
-        class="text-xl font-bold hover:text-gray-200 py-2 px-4 rounded transition duration-300"
-        >airbnb</a
-      >
+      <a href="/" class="text-2xl font-bold hover:text-gray-200 transition duration-300">
+        Stay Booked
+      </a>
     </div>
-    <ul class="flex space-x-4">
-      <li>
-        <a
-          href="/homes"
-          class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300"
-          >Homes</a
-        >
-      </li>
-      <li>
-        <a
-          href="/host/host-home-list"
-          class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300"
-          >Host Home List</a
-        >
-      </li>
-      <li>
-        <a
-          href="/host/add-home"
-          class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300"
-          >Add Home</a
-        >
-      </li>
-      <li>
-        <a
-          href="/favourites"
-          class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300"
-          >Favourites</a
-        >
-      </li>
-      <li>
-        <a
-          href="/bookings"
-          class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300"
-          >Booking</a
-        >
+
+    <!-- Navigation Links -->
+    <ul class="flex items-center space-x-6">
+      <% if (isLoggedIn) { %>
+        <% if (user && user.userType === 'host') { %>
+          <li>
+            <a href="/host/host-home-list" 
+               class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300">
+              Host Home List
+            </a>
+          </li>
+          <li>
+            <a href="/host/add-home" 
+               class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300">
+              Add Home
+            </a>
+          </li>
+          <li>
+            <a href="/host/bookedHomes" 
+               class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300">
+              Booked Homes
+            </a>
+          </li>
+        <% } else { %>
+          <li>
+            <a href="/homes" 
+               class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300">
+              Homes
+            </a>
+          </li>
+          <li>
+            <a href="/favourites" 
+               class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300">
+              Favourites
+            </a>
+          </li>
+          
+        <% } %>
+      <% } %>
+
+      <!-- Auth Links -->
+      <li class="flex items-center space-x-4">
+        <% if (!isLoggedIn) { %>
+          <a href="/signup" 
+             class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300">
+            Sign Up
+          </a>
+          <a href="/login" 
+             class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300">
+            Login
+          </a>
+        <% } else { %>
+          <form action="/logout" method="POST" class="m-0">
+            <button type="submit" 
+                    class="hover:bg-white hover:bg-opacity-20 py-2 px-4 rounded transition duration-300">
+              Logout
+            </button>
+          </form>
+        <% } %>
       </li>
     </ul>
   </nav>

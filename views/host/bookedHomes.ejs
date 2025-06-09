@@ -1,0 +1,122 @@
+<%- include('../partials/head') %>
+<!-- Make sure Tailwind CSS is included in your head partial -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <%- include('../partials/nav') %>
+    
+    <!-- Page Header -->
+    <header class="bg-red-600 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <h1 class="text-white text-3xl font-bold text-center">
+                All Bookings
+            </h1>
+            <p class="text-red-100 text-center mt-2">
+                Manage and view all property bookings
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Bookings Table Card -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-gray-50 border-b">
+                <h2 class="text-xl font-semibold text-gray-800">Booking Details</h2>
+            </div>
+
+            <!-- Desktop Table View -->
+            <div class="hidden md:block overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50 border-b">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Home Photo
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Home
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                User
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <% bookings.forEach(booking => { %>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <!-- Home Photo -->
+                            <td class="px-6 py-4">
+                                <img 
+                                    src="<%= booking.homeId.photo %>" 
+                                    alt="<%= booking.homeId.houseName %>" 
+                                    class="w-24 h-24 rounded-lg object-cover shadow-sm"
+                                >
+                            </td>
+
+                            <!-- Home Details -->
+                            <td class="px-6 py-4">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                                    <%= booking.homeId.houseName %>
+                                </h3>
+                                <p class="text-gray-600 mb-2 flex items-center">
+                                    <i class="fas fa-map-marker-alt mr-2 text-red-500"></i>
+                                    <%= booking.homeId.location %>
+                                </p>
+                            </td>
+
+                            <!-- User Details -->
+                            <td class="px-6 py-4">
+                                <p class="text-gray-600 mb-2 flex items-center">
+                                    <i class="fas fa-user mr-2 text-blue-500"></i>
+                                    <%= booking.userId.firstName %> <%= booking.userId.lastName %>
+                                </p>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile Card View -->
+            <div class="md:hidden">
+                <% bookings.forEach(booking => { %>
+                <div class="border-b border-gray-200 p-4 last:border-b-0">
+                    <div class="flex items-start space-x-4">
+                        <img 
+                            src="<%= booking.homeId.photo %>" 
+                            alt="<%= booking.homeId.houseName %>" 
+                            class="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+                        >
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                                <%= booking.homeId.houseName %>
+                            </h3>
+                            <p class="text-gray-600 mb-2 flex items-center">
+                                <i class="fas fa-map-marker-alt mr-2 text-red-500"></i>
+                                <%= booking.homeId.location %>
+                            </p>
+                            <p class="text-gray-600 flex items-center">
+                                <i class="fas fa-user mr-2 text-blue-500"></i>
+                                <%= booking.userId.firstName %> <%= booking.userId.lastName %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+
+            <!-- Empty State -->
+            <% if (bookings.length === 0) { %>
+            <div class="text-center py-12">
+                <i class="fas fa-calendar-times text-gray-400 text-6xl mb-4"></i>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">No bookings found</h3>
+                <p class="text-gray-500">There are no bookings to display at the moment.</p>
+            </div>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>

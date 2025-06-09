@@ -9,20 +9,23 @@
                 </h1>
             </header>
             <main class="container mx-auto px-4 py-8">
-                <form action="/host/<%=editing ? "edit-home" : "add-home" %>" method="POST" class="max-w-md mx-auto">
-                    <input type="hidden" name="id" value="<%= editing ? home.id : '' %>" />
-                    <input type="text" name="houseName" value="<%= editing ? home.houseName : '' %>"
+                <form action="/host/<%=editing ? "edit-home" : "add-home"%>" method="POST" enctype="multipart/form-data" class="max-w-md mx-auto">
+                    <input type="hidden" name="id" value="<%= editing ? home._id : ''%>" />
+                    <input type="text" name="houseName" value="<%= editing ? home.houseName : ''%>"
                         placeholder="House Name"
                         class="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-red-500" />
-                    <input type="text" name="price" value="<%= editing ? home.price : '' %>"
+                    <input type="text" name="price" value="<%= editing ? home.price : ''%>"
                         placeholder="Enter your price"
                         class="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-red-500" />
-                    <input type="text" name="location" value="<%= editing ? home.location : '' %>" placeholder="Enter Your Location"
+                    <input type="text" name="location" value="<%= editing ? home.location : ''%>" placeholder="Enter Your Location"
                         class="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-red-500" />
-                    <input type="text" name="rating" value="<%= editing ? home.rating : '' %>" placeholder="Rating"
+                    <input type="text" name="rating" value="<%= editing ? home.rating : ''%>" placeholder="Rating"
                         class="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-red-500" />
-                    <input type="text" name="photo" value="<%= editing ? home.photo : '' %>" placeholder="Photo Url"
+                    <input type="file" name="photo" accept="image/*"
                         class="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-red-500" />
+                     <textarea name="description" 
+                        placeholder="Describe Your Home"
+                        class="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-red-500" ><%= editing ? home.description : '' %></textarea>
                     <input type="submit" value="<%=editing ? " Update" : "Add Home" %>" class="w-full bg-red-600
                     text-white px-6 py-2 rounded-lg hover:bg-red-700 transition duration-200 ease-in-out
                     cursor-pointer"/>

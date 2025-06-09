@@ -1,14 +1,123 @@
 <%- include('../partials/head') %>
+<!-- Make sure Tailwind CSS is included in your head partial -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50">
     <%- include('../partials/nav') %>
-    <header class="bg-white shadow-md py-4">
-        <h1 class="text-red-700 text-4xl font-bold text-center">My Bookings</h1>
-        
-    </header>
-    <main class="container mx-auto px-4 py-8">
-        <a href="/" class="inline-block bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition duration-200 ease-in-out">Go to Home</a>
-    </main>
     
+    <!-- Page Header -->
+    <header class="bg-red-600 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <h1 class="text-white text-3xl font-bold text-center">
+                Booking Summary
+            </h1>
+            <p class="text-red-100 text-center mt-2">
+                Review your booking details
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Property Card -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+            <div class="flex flex-col md:flex-row">
+                <!-- Image Section -->
+                <div class="md:w-1/2">
+                    <div class="h-64 md:h-80 relative">
+                        <img 
+                            src="<%= home.photo %>" 
+                            alt="<%= home.houseName %>" 
+                            class="w-full h-full object-cover"
+                            style="object-fit: cover; width: 100%; height: 100%;"
+                        >
+                        <div class="absolute top-4 right-4">
+                            <%- include('../partials/favourite') %>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Details Section -->
+                <div class="md:w-1/2 p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-3">
+                        <%= home.houseName %>
+                    </h2>
+                    
+                    <div class="flex items-center text-gray-600 mb-4">
+                        <i class="fas fa-map-marker-alt text-red-500 mr-2"></i>
+                        <span><%= home.location %></span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/>
+                            </svg>
+                            <span class="text-gray-700"><%= home.rating %></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Description Section -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-gray-800 mb-2">About this place</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            <%= home.description %>
+                        </p>
+                    </div>
+                    
+                    <div class="border-t pt-4">
+                        <div class="text-right">
+                            <span class="text-2xl font-bold text-red-600">
+                                ₹<%= home.price %><span class="text-sm text-gray-500">/night</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Booking Details</h3>
+          
+        <!-- Price Breakdown -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Price Details</h3>
+            
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <span class="text-gray-600">₹<%= home.price %> × 1 night</span>
+                    <span>₹<%= home.price %></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Service fee</span>
+                    <span>₹500</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Taxes</span>
+                    <span>₹200</span>
+                </div>
+                <hr class="my-3">
+                <div class="flex justify-between font-bold text-lg">
+                    <span>Total</span>
+                    <span class="text-red-600">₹<%= parseInt(home.price) + 700 %></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <button >
+                <a href="/homes" class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-6 rounded-md transition-colors">Back</a>                
+            </button>
+            <form action="/bookings/<%= home._id %>" method="POST">
+            <button class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-md transition-colors" >                
+                    Confirm Booking                
+            </button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
